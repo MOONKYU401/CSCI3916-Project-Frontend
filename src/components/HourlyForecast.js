@@ -1,21 +1,43 @@
-// HourlyForecast.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const dummyHours = [
-  { time: 'Now', temp: 17 },
-  { time: '2 PM', temp: 18 },
-  { time: '3 PM', temp: 19 },
-  { time: '4 PM', temp: 20 },
-  { time: '5 PM', temp: 20 }
-];
+function HourlyForecast({ city }) {
+  const [hourly, setHourly] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-function HourlyForecast() {
+  useEffect(() => {
+    const fetchHourly = async () => {
+      if (!city) return;
+
+      setLoading(true);
+      try {
+        const url = `https://weather-api-wksi.onrender.com/hourly?city=${city}`;
+        const response = await fetch(url);
+        const json = await response.json();
+
+        if (json.success) {
+          setHourly(json.hourly || []);
+        } else {
+          console.warn('No hourly data:', json.msg);
+        }
+      } catch (err) {
+        console.error('Failed to fetch hourly data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHourly();
+  }, [city]);
+
+  if (loading) return <p>Loading hourly forecast...</p>;
+  if (!hourly.length) return <p>No hourly data available.</p>;
+
   return (
     <div className="hourly-scroll">
-      {dummyHours.map((hour, index) => (
+      {hourly.map((hour, index) => (
         <div key={index} className="hour-card">
           <div>{hour.time}</div>
-          <div>☁️</div>
+          <div>{hour.icon || '☁️'}</div>
           <div>{hour.temp}°</div>
         </div>
       ))}

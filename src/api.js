@@ -58,19 +58,5 @@ export const fetchWeatherByUsername = async (username) => {
   }
 };
 
-// Add Weather Entry (JWT protected)
-export const createWeatherEntry = async (weatherData) => {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await axios.post(`${BASE_URL}/weather/create`, weatherData, {
-      headers: {
-        Authorization: `JWT ${token}`,
-      },
-    });
+//Get Weather by City
 
-    return response.data;
-  } catch (error) {
-    console.error('Failed to create weather entry:', error.response?.data || error.message);
-    return null;
-  }
-};
