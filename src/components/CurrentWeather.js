@@ -17,7 +17,7 @@ function CurrentWeather({ city, username }) {
         } else {
           // Option 2: use default city weather
           const response = await fetch(
-            `https://weather-api-wksi.onrender.com/weather?city=${city}`
+            `https://csci3916-project-backend.onrender.com/weather?city=${city}`
           );
           const json = await response.json();
           setWeatherData(json.weather || null);

@@ -10,7 +10,7 @@ function DailyForecast({ city }) {
 
       setLoading(true);
       try {
-        const url = `https://weather-api-wksi.onrender.com/forecast?city=${city}`;
+        const url = `https://csci3916-project-backend.onrender.com/forecast?city=${city}`;
         const response = await fetch(url);
         const json = await response.json();
         if (json.success) {
