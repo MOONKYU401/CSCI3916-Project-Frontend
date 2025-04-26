@@ -1,37 +1,54 @@
-// Login.js
 import React, { useState } from 'react';
-import './Login.css';
+import { submitLogin } from '../actions/authActions';
+import { useDispatch } from 'react-redux';
+import { Form, Button } from 'react-bootstrap';
 
-function Login({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function Login() {
+  const [details, setDetails] = useState({
+    username: '',
+    password: '',
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: Connect to backend auth API
-    if (username && password) {
-      onLogin();
-    }
+  const dispatch = useDispatch();
+
+  const updateDetails = (event) => {
+    setDetails({
+      ...details,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const login = (event) => {
+    event.preventDefault(); // Prevent form from refreshing the page
+    dispatch(submitLogin(details));
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Sign In</h2>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+        <Form onSubmit={login} className='login-form bg-dark text-light p-4 rounded'> {/* Use onSubmit for the form */}
+        <Form.Group controlId="username" className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+            type="email"
+            placeholder="Enter email"
+            autoComplete="username"
+            value={details.username}
+            onChange={updateDetails}
+            />
+        </Form.Group>
+
+        <Form.Group controlId="password" className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            value={details.password}
+            onChange={updateDetails}
+            />
+        </Form.Group>
+        <Button type="submit">Sign in</Button> {/* Use type="submit" */}
+        </Form>
     </div>
   );
 }
