@@ -28,7 +28,7 @@ export const loginUser = async (username, password) => {
 // Sign Up
 export const signupUser = async (username, password, name, location) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/signup`, {
+    const response = await axios.post(`${BASE_URL}/signup`, {
       username,
       password,
       name,
