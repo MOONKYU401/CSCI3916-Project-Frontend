@@ -1,0 +1,94 @@
+.weather-header {
+  background: var(--card-bg);
+  padding: 0 20px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.weather-header input {
+  width: 300px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-controls button {
+  padding: 6px 12px;
+  background: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ✅ 하단 탭 스타일 */
+.weather-tabs {
+  display: flex;
+  gap: 15px;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  border-bottom: 2px solid var(--text-color);
+}
+
+.suggestion-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+  padding: 0;
+  background-color: var(--card-bg, #fff);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+  color: var(--text-color, #000);
+}
+
+.suggestion-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
