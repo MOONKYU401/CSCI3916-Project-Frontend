@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./TodayPage.css";
 export default function TenDayPage({ darkMode, city }) {
   const [forecast, setForecast] = useState([]);
-  const API_KEY = "7e7356d8108a3783171e1c6dc965fe01";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => {
     const fetchForecast = async () => {

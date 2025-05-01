@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function TodayPage({ darkMode, city }) {
   const [data, setData] = useState(null);
-  const API_KEY = "7e7356d8108a3783171e1c6dc965fe01";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => {
     if (!city) return;

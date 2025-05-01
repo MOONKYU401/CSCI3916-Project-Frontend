@@ -9,7 +9,7 @@ export default function WeatherHome({ city }) {
   const [isDark, setIsDark] = useState(false);
   const navigate = useNavigate();
 
-  const API_KEY = "7e7356d8108a3783171e1c6dc965fe01";
+  const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => {
     const mode = document.documentElement.getAttribute("data-theme");
