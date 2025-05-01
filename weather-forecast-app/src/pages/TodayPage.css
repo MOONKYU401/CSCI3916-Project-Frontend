@@ -10,14 +10,12 @@
   box-sizing: border-box;
 }
 
-/* 헤더 제목 */
 .page-wrapper h2 {
   font-size: 24px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-/* 각 섹션 제목 */
 .page-wrapper h3 {
   font-size: 18px;
   margin-bottom: 8px;
@@ -26,7 +24,6 @@
   color: var(--text-color);
 }
 
-/* 정보 텍스트 */
 .page-wrapper p {
   font-size: 15px;
   margin: 6px 0;

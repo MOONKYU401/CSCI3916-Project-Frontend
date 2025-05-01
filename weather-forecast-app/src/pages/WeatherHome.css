@@ -15,7 +15,6 @@
   color: var(--text-color);
 }
 
-/* ✅ 배경 설정 */
 .weather-container {
   width: 100%;
   padding: 40px 0;
@@ -25,7 +24,6 @@
   box-sizing: border-box;
 }
 
-/* ✅ 상단 요약 박스 */
 .weather-grid {
   display: flex;
   justify-content: center;
@@ -37,7 +35,6 @@
   box-sizing: border-box;
 }
 
-/* ✅ 공통 박스 */
 .weather-box {
   background: var(--card-bg);
   padding: 20px;
@@ -48,7 +45,6 @@
   box-sizing: border-box;
 }
 
-/* ✅ 현재 날씨 (왼쪽) */
 .weather-main {
   display: flex;
   flex-direction: column;
@@ -74,7 +70,6 @@
   margin: 4px 0;
 }
 
-/* ✅ 오른쪽 세부정보 */
 .weather-details {
   display: flex;
   flex-direction: column;
@@ -84,7 +79,6 @@
   max-width: 500px;
 }
 
-/* ✅ 세부 정보 행 */
 .detail-row {
   display: flex;
   justify-content: space-between;
@@ -92,7 +86,6 @@
   flex-wrap: wrap;
 }
 
-/* ✅ 세부 카드 */
 .detail-section {
   background-color: var(--card-bg);
   border-radius: 10px;
@@ -119,7 +112,6 @@
   flex-wrap: wrap;
 }
 
-/* ✅ 예보 섹션 */
 .weather-forecast-row {
   display: flex;
   flex-direction: column;
@@ -131,7 +123,6 @@
   box-sizing: border-box;
 }
 
-/* ✅ 각 예보 박스 (Next 4 Hours, 3-Day Forecast) */
 .forecast-box {
   background: var(--card-bg);
   padding: 20px;
@@ -145,7 +136,7 @@
   margin-right: auto;
 }
 
-/* ✅ 예보 카드 레이아웃 */
+
 .forecast-grid {
   display: flex;
   flex-wrap: wrap;
@@ -154,7 +145,7 @@
   margin-top: 15px;
 }
 
-/* ✅ 예보 카드 개별 */
+
 .forecast-card {
   background: var(--card-bg);
   padding: 16px;

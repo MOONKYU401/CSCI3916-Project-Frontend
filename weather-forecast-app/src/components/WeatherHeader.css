@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-/* ✅ 하단 탭 스타일 */
+
 .weather-tabs {
   display: flex;
   gap: 15px;
@@ -63,6 +63,7 @@
 .tab-btn:hover {
   border-bottom: 2px solid var(--text-color);
 }
+
 
 .suggestion-dropdown {
   position: absolute;
@@ -91,4 +92,48 @@
 
 .suggestion-item:hover {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.saved-city-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 999;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 5px 0;
+}
+
+
+.saved-city-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.saved-city-item:hover {
+  background-color: #f5f5f5;
+}
+
+.saved-city-item button {
+  background: none;
+  border: none;
+  color: crimson;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
 }

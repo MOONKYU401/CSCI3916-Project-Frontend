@@ -1,42 +1,38 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React, { useState } from "react";
 import "./SignInPage.css";
 import { useNavigate } from "react-router-dom";
 
-export default function SignInPage() {
-  const { login } = useContext(AuthContext);
+export default function SignUpPage() {
   const [form, setForm] = useState({ username: "", password: "" });
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-    
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async () => {
-    setError("");
+  const handleSignUp = async () => {
+    setMessage("");
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       const data = await res.json();
       if (res.ok) {
-        login(data.token);
-        alert("Signed in!");
-        navigate("/");
+        setMessage("Account created!");
+        navigate("/signin");
       } else {
-        setError(data.error || "Login failed");
+        setMessage(data.error || "Sign up failed.");
       }
     } catch (err) {
-      setError("Network error");
+      setMessage("Network error");
     }
   };
 
   return (
     <div className="signin-container">
-    <h2>Sign In</h2>
+    <h2>Create Account</h2>
     <input
       type="text"
       name="username"
@@ -53,8 +49,8 @@ export default function SignInPage() {
       onChange={handleChange}
       className="signin-input"
     />
-    <button onClick={handleLogin} className="signin-button">Sign In</button>
-    {error && <p className="signin-error">{error}</p>}
+    <button onClick={handleSignUp} className="signin-button">Sign Up</button>
+    {message && <p className="signin-error">{message}</p>}
   </div>
 );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./WeatherHome.css";
 
 export default function WeatherHome({ city }) {
@@ -7,6 +8,7 @@ export default function WeatherHome({ city }) {
   const [hourly, setHourly] = useState([]);
   const [daily, setDaily] = useState([]);
   const [isDark, setIsDark] = useState(false);
+  const { authData, saveCity } = useAuth(); 
   const navigate = useNavigate();
 
   const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
@@ -30,20 +32,27 @@ export default function WeatherHome({ city }) {
 
   useEffect(() => {
     if (!city) return;
+
     const fetchWeatherData = async () => {
       try {
         const currentRes = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+            city
+          )}&appid=${API_KEY}&units=metric`
         );
         const currentData = await currentRes.json();
 
         const hourlyRes = await fetch(
-          `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+          `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${encodeURIComponent(
+            city
+          )}&appid=${API_KEY}&units=metric`
         );
         const hourlyData = await hourlyRes.json();
 
         const dailyRes = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast/daily?q=${encodeURIComponent(city)}&cnt=3&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast/daily?q=${encodeURIComponent(
+            city
+          )}&cnt=3&appid=${API_KEY}&units=metric`
         );
         const dailyData = await dailyRes.json();
 
@@ -90,6 +99,46 @@ export default function WeatherHome({ city }) {
       ? "/images/rain.jpg"
       : "/images/clear.jpg";
 
+      const handleSaveCity = async () => {
+        if (!authData?.token) {
+          alert("Please sign in to save your location.");
+          navigate("/signin");
+          return;
+        }
+      
+        try {
+          const response = await fetch(`https://csci3916-project-backend.onrender.com/history`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authData.token}`, //
+            },
+            body: JSON.stringify({ city }),
+          });
+      
+          const result = await response.json();
+         
+      
+          if (response.status === 409) {
+            alert("This city is already your saved location.");
+            return;
+          }
+      
+          if (!response.ok) {
+            alert(`${result.error || "Failed to save city"}`);
+            return;
+          }
+      
+          saveCity(city); 
+          alert(`${city} has been saved.`);
+        } catch (err) {
+          console.error(" Network or unexpected error:", err);
+          alert("Something went wrong while saving your city.");
+        }
+      };
+      
+      
+
   return (
     <div className="weather">
       <div
@@ -110,6 +159,10 @@ export default function WeatherHome({ city }) {
             <h1>{weather.temp}°</h1>
             <p>{weather.description}</p>
             <p>Feels Like: {weather.feelsLike}°</p>
+
+            <button onClick={handleSaveCity} style={{ marginTop: "10px" }}>
+              Set as My Location
+            </button>
           </div>
 
           <div className="weather-box weather-details">
