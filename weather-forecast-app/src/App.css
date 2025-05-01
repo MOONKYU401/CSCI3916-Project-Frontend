@@ -1,0 +1,32 @@
+/* Light mode 기본 색상 */
+:root {
+  --bg-color: #f0f4f8;
+  --text-color: #000000;
+  --card-bg: #ffffff;
+}
+
+/* Dark mode 전환 */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1f1f1f;
+}
+
+/* 공통 스타일 */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App {
+  padding: 20px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
